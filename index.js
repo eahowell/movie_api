@@ -43,7 +43,7 @@ app.use(bodyParser.json());
 app.use(methodOverride());
 
 const cors = require("cors");
-let allowedOrigins = ["http://localhost:8080", "http://testsite.com", "http://localhost:1234"];
+let allowedOrigins = ["http://localhost:8080", "http://testsite.com", "http://localhost:1234", "https://wtp8hh.csb.app"];
 
 app.use(
   cors({
