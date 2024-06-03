@@ -214,6 +214,7 @@ Request Body
 Responses
 
 > | http code | content-type | response |
+> | --------- | -------------------------- | ------------------------------------------------- |
 > | `500` | `text/plain;charset=UTF-8` | Description of the error |
 > | `422` | `application/json` | A JSON object holding an array of the validation erros |
 > | `404` | `text/plain;charset=UTF-8` | username + " already exists" |
@@ -247,6 +248,7 @@ Example cURL
 Responses
 
 > | http code | content-type | response |
+> | --------- | -------------------------- | ------------------------------------------------- |
 > | `500` | `text/plain;charset=UTF-8` | Description of the error |
 > | `400` | `text/plain;charset=UTF-8` | Text response "Something is not right" |
 > | `200` | `application/json` | A JSON object holding data about the user and the JWT token |
