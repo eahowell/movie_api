@@ -18,7 +18,7 @@ module.exports = (router) => {
       } else {
         res
           .status(404)
-          .send("Username " + req.params.username + " was not found.");
+          .send("Username " + req.body.username + " was not found.");
       }
     })
     .catch((err) => {
