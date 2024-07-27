@@ -294,7 +294,8 @@ app.put(
      if (req.body.Email) updateFields.Email = req.body.Email;
      if (req.body.FirstName) updateFields.FirstName = req.body.FirstName;
      if (req.body.LastName) updateFields.LastName = req.body.LastName;
-     if (req.body.Password) updateFields.Password = req.body.Password;
+     let hashPassword = Users.hashPassword(req.body.Password);
+     if (req.body.Password) updateFields.Password = hashPassword;
 
     await Users.findOneAndUpdate(
       { Username: req.params.username },
