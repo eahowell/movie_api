@@ -13,7 +13,7 @@ module.exports = (router) => {
         if (hashPassword === user.Password) {
           res.status(200).send(true);
         } else {
-          res.status(401).send("Password was not correct." + user.Password);
+          res.status(401).send("Password was not correct." + user.Password + " Hashed:" + hashPassword);
         }        
       } else {
         res
