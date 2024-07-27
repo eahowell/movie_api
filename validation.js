@@ -3,9 +3,8 @@
   const Users = Models.User;
 
 // CREATE - POST - Validate provided password is correct;  (using username and password)
-// READ - GET - Validate provided password is correct;  (using username and password)
 module.exports = (router) => {
-  router.get("/validation", (req, res) => {
+  router.post("/validation", (req, res) => {
     Users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
