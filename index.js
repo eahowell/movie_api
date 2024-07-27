@@ -268,17 +268,11 @@ app.put(
   "/users/:username",
   passport.authenticate("jwt", { session: false }),
   [
-    // Password must be present and between 8 and 25 characters
-    check("Password", "Password is required").not().isEmpty(),
-    check(
-      "Password",
-      "Password must be between 8 and 25 characters long."
-    ).isLength({ min: 8, max: 25 }),
-    // First & Last Name, Email, and Birtday must be present
-    check("FirstName", "First Name is required").not().isEmpty(),
-    check("LastName", "Last Name is required").not().isEmpty(),
-    check("Email", "Email is required").not().isEmpty(),
-    check("Email", "Email does not appear to be valid").isEmail(),
+    // Password must be between 8 and 25 characters if provided
+    check("Password")
+      .optional()
+      .isLength({ min: 8, max: 25 })
+      .withMessage("Password must be between 8 and 25 characters long.")
   ],
   async (req, res) => {
     // check the validation object for errors
@@ -295,21 +289,21 @@ app.put(
           `Permission denied ${req.user.Username} is not ${req.params.username}`
         );
     }
+     // Create an object with only the fields that are present in the request body
+     const updateFields = {};
+     if (req.body.Email) updateFields.Email = req.body.Email;
+     if (req.body.FirstName) updateFields.FirstName = req.body.FirstName;
+     if (req.body.LastName) updateFields.LastName = req.body.LastName;
+     if (req.body.Password) updateFields.Password = req.body.Password;
+
     await Users.findOneAndUpdate(
       { Username: req.params.username },
-      {
-        $set: {
-          Email: req.body.Email,
-          FirstName: req.body.FirstName,
-          LastName: req.body.LastName,
-          Password: req.body.Password,
-        },
-      },
+      { $set: updateFields },
       { new: true }
     )
       .then((updatedUser) => {
         if (updatedUser) {
-          res.status(201).json(updatedUser);
+          res.status(200).json(updatedUser);
         } else {
           res
             .status(404)
