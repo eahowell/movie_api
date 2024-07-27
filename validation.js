@@ -1,29 +1,28 @@
 // Description: Validate provided password is correct;  (using username and password)
-  const passport = require("passport"); // Local passport file
+  const Models = require("./models.js");  
+  const Users = Models.User;
 
-
-
+// CREATE - POST - Validate provided password is correct;  (using username and password)
 // READ - GET - Validate provided password is correct;  (using username and password)
 module.exports = (router) => {
-  router.post("/validation", (req, res) => {
-    passport.authenticate("local", { session: false }, (error, user, info) => {
-      if (error) {
-        return res.status(400).json({
-          message: "Something is not right",
-          user: false,
-        });
-      } else if (!user) {
-        return res.status(400).json({
-          message: info.message,
-          user: false,
-        })
+  router.get("/validation", (req, res) => {
+    Users.findOne({ Username: req.body.username })
+    .then((user) => {
+      if (user) {
+        let hashPassword = Users.hashPassword(req.body.Password);
+        if (hashPassword === user.Password) {
+          res.status(200).send(true);
+        } else {
+          res.status(401).message("Password was not correct.");
+        }        
       } else {
-        return res.status(200).json({
-          message: "Valid password",
-          user: user,
-        });
+        res
+          .status(404)
+          .send("Username " + req.params.username + " was not found.");
       }
-    })(req, res);
-  });
-};
-
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+})};
