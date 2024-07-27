@@ -62,9 +62,11 @@ app.use(
 );
 
 let auth = require("./auth")(app);
+let validate = require("./validation")(app);
 const passport = require("passport");
 require("./passport"); // Local passport file
 const { check, validationResult } = require("express-validator");
+const req = require("express/lib/request.js");
 
 // Pass through the static files stored in the public folder
 app.use(express.static("public"));
