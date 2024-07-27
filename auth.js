@@ -13,8 +13,28 @@ let generateJWTToken = (user) => {
   });
 };
 
-// CREATE - POST - Allow users to login;  (using username and password)
+
 module.exports = (router) => {
+  const cors = require("cors");
+  let allowedOrigins = ["http://localhost:8080", "http://testsite.com", "http://localhost:1234", "https://wtp8hh.csb.app", "https://myflix-eahowell-7d843bf0554c.herokuapp.com"];
+  
+  router.use(
+    cors({
+      origin: (origin, callback) => {
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) {
+          // If a specific origin isn’t found on the list of allowed origins
+          let message =
+            "The CORS policy for this application does not allow access from origin " +
+            origin;
+          return callback(new Error(message), false);
+        }
+        return callback(null, true);
+      },
+    })
+  );
+  
+// CREATE - POST - Allow users to login;  (using username and password)
   router.post("/login", (req, res) => {
     passport.authenticate("local", { session: false }, (error, user, info) => {
       if (error || !user) {
