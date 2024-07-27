@@ -5,7 +5,7 @@
 
 // READ - GET - Validate provided password is correct;  (using username and password)
 module.exports = (router) => {
-  router.get("/validation", (req, res) => {
+  router.post("/validation", (req, res) => {
     passport.authenticate("local", { session: false }, (error, user, info) => {
       if (error) {
         return res.status(400).json({
