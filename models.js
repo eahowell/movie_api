@@ -30,9 +30,18 @@ let userSchema = mongoose.Schema({
   ToWatch: [{ type: mongoose.Schema.Types.ObjectId, ref: "Movie" }],
 });
 
-userSchema.statics.hashPassword = (password) => {
-  return bcrypt.hashSync(password, 10);
+userSchema.statics.hashPassword = function(password) {
+  const saltRounds = 10;
+  try {
+      const salt = bcrypt.genSaltSync(saltRounds);
+      const hash = bcrypt.hashSync(password, salt);
+      return hash;
+  } catch (error) {
+      console.error('Error hashing password:', error);
+      throw new Error('Error hashing password');
+  }
 };
+
 
 userSchema.methods.validatePassword = function (password) {
   return bcrypt.compareSync(password, this.Password);
