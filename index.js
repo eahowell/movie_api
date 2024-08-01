@@ -242,7 +242,11 @@ app.post(
     await Users.findOne({ Username: req.body.Username })
       .then((user) => {
         if (user) {
-          return res.status(400).info(req.body.Username + " already exists");
+          return {
+            status: 409,
+            message: "Username " + req.body.Username + " already exists",
+            info: info,
+          };
         } else {
           let hashPassword = Users.hashPassword(req.body.Password);
           Users.create({
