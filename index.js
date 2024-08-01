@@ -232,18 +232,19 @@ app.post(
     check("Email", "Email is required").not().isEmpty(),
     check("Email", "Email does not appear to be valid").isEmail(),
   ],
-  async (req, res) => {
+  async (req, res, info) => {
     // Check the validation object for errors
     let errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
-    let hashPassword = Users.hashPassword(req.body.Password);
+    
     await Users.findOne({ Username: req.body.Username })
       .then((user) => {
         if (user) {
-          return res.status(400).send(req.body.Username + " already exists");
+          return res.status(400).info(req.body.Username + " already exists");
         } else {
+          let hashPassword = Users.hashPassword(req.body.Password);
           Users.create({
             Username: req.body.Username,
             Password: hashPassword,
