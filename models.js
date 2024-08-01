@@ -38,7 +38,7 @@ userSchema.statics.hashPassword = function(password) {
       return hash;
   } catch (error) {
       console.error('Error hashing password:', error);
-      throw new Error('Error hashing password');
+      throw new Error('Error hashing password  ' + error);
   }
 };
 
