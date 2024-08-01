@@ -43,7 +43,13 @@ app.use(bodyParser.json());
 app.use(methodOverride());
 
 const cors = require("cors");
-let allowedOrigins = ["http://localhost:8080", "http://testsite.com", "http://localhost:1234", "https://wtp8hh.csb.app", "https://myflix-eahowell-7d843bf0554c.herokuapp.com"];
+let allowedOrigins = [
+  "http://localhost:8080",
+  "http://testsite.com",
+  "http://localhost:1234",
+  "https://wtp8hh.csb.app",
+  "https://myflix-eahowell-7d843bf0554c.herokuapp.com",
+];
 
 app.use(
   cors({
@@ -272,7 +278,7 @@ app.put(
     check("Password")
       .optional()
       .isLength({ min: 8, max: 25 })
-      .withMessage("Password must be between 8 and 25 characters long.")
+      .withMessage("Password must be between 8 and 25 characters long."),
   ],
   async (req, res) => {
     // check the validation object for errors
@@ -289,13 +295,16 @@ app.put(
           `Permission denied ${req.user.Username} is not ${req.params.username}`
         );
     }
-     // Create an object with only the fields that are present in the request body
-     const updateFields = {};
-     if (req.body.Email) updateFields.Email = req.body.Email;
-     if (req.body.FirstName) updateFields.FirstName = req.body.FirstName;
-     if (req.body.LastName) updateFields.LastName = req.body.LastName;
-     let hashPassword = Users.hashPassword(req.body.Password);
-     if (req.body.Password) updateFields.Password = hashPassword;
+    // Create an object with only the fields that are present in the request body
+    const updateFields = {};
+    if (req.body.Email) updateFields.Email = req.body.Email;
+    if (req.body.FirstName) updateFields.FirstName = req.body.FirstName;
+    if (req.body.LastName) updateFields.LastName = req.body.LastName;
+
+    if (req.body.Password) {
+      let hashPassword = Users.hashPassword(req.body.Password);
+      updateFields.Password = hashPassword;
+    }
 
     await Users.findOneAndUpdate(
       { Username: req.params.username },
