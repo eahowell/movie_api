@@ -5,7 +5,7 @@
 ![GitHub forks](https://img.shields.io/github/forks/eahowell/movie_api)
 ![GitHub watchers](https://img.shields.io/github/watchers/eahowell/movie_api)
 
-Welcome to the myFlix API! Find the information for favorite movies (directors, actors, genres, etc.) Users can register, log in, and manage their favorite movies.
+
 
 ## Table of Contents
 
@@ -25,8 +25,16 @@ Welcome to the myFlix API! Find the information for favorite movies (directors, 
   - [License](#license)
 
 ## Getting Started
+Welcome to the myFlix API! Find the information for favorite movies (directors, actors, genres, etc.) Users can register, log in, and manage their favorite movies.
+
+- [Visit the live myFlix client](https://eahowell-myflix.netlify.app/)
 
 ## Installation
+### Install Node
+  - Get the newest release to download to your device. 
+    - In the README section of this [NVM for Windows GitHub page](https://github.com/coreybutler/nvm-windows#readme), you’ll find a Download Now! button. 
+    - Clicking this button will open information about the latest release, including a list of “Assets”. 
+    - From this list, download the nvm-setup.zip file
 
 #### Dependencies
 
@@ -257,6 +265,26 @@ Example cURL
 
 > ```javascript
 >  curl -L POST "Content-Type: application/json" http://localhost:8080/login
+> ```
+
+</details>
+
+<details>
+  <summary><code>POST</code> <code><b>/validation</b></code> <code>(validate provided password)</code></summary>
+
+Responses
+
+> | http code | content-type | response |
+> | --------- | -------------------------- | ------------------------------------------------- |
+> | `500` | `text/plain;charset=UTF-8` | Description of the error |
+> | `401` | `text/plain;charset=UTF-8` | Text response "Password was not correct" |
+> | `404` | `text/plain;charset=UTF-8` | Text response "Username not found" |
+> | `200` | `application/json` | true |
+
+Example cURL
+
+> ```javascript
+>  curl -L POST "Content-Type: application/json" http://localhost:8080/validation
 > ```
 
 </details>
@@ -690,7 +718,17 @@ Example cURL
 </details>
 
 ## Authentication
+- Uses LocalStrategy and JWTStrategy
+- Users are authenticated with basic HTTP authentication and generating a JWT token for authenticating future requests
 
 ## Database
-
+- myFlixDB is stored in MongoDB
+- Collections include:
+  - Users
+  - Movies
+  - Genres
+  - Directors
+  - Actors
+ 
 ## License
+- ISC
