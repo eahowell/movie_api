@@ -247,7 +247,6 @@ app.post(
           console.log("Username " + req.body.Username + " already exists");
           res
           .status(409)
-          .type(json)
           .text("Username " + req.body.Username + " already exists")
           .send("Username " + req.body.Username + " already exists")
           .statustext("Username " + req.body.Username + " already exists")
