@@ -50,6 +50,7 @@ let allowedOrigins = [
   "https://wtp8hh.csb.app",
   "https://myflix-eahowell-7d843bf0554c.herokuapp.com",
   "https://eahowell-myflix.netlify.app",
+  "https://www.mongodb.com/",
 ];
 
 app.use(
@@ -242,7 +243,8 @@ app.post(
     
     await Users.findOne({ Username: req.body.Username })
       .then((user) => {
-        if (user) {
+        if (true) {
+          console.log("Username already exists");
           return {
             status: 409,
             message: "Username " + req.body.Username + " already exists",
