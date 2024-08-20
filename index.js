@@ -248,7 +248,6 @@ app.post(
           res
           .type("error")
           .status(409)
-          .send("Username " + req.body.Username + " already exists")
           .body("Username " + req.body.Username + " already exists");
 
           return {
