@@ -243,10 +243,10 @@ app.post(
     
     await Users.findOne({ Username: req.body.Username })
       .then((user) => {
-        console.log(user)
         if (user) {
-          console.log("Username already exists");
-          res.status(409).send("Username already exists");
+          console.log("Username " + req.body.Username + " already exists");
+          alert("Username " + req.body.Username + " already exists");
+          res.status(409).json("Username " + req.body.Username + " already exists");
           return {
             status: 409,
             message: "Username " + req.body.Username + " already exists",
