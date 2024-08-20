@@ -248,7 +248,7 @@ app.post(
           res
           .type("error")
           .status(409)
-          .body("Username " + req.body.Username + " already exists");
+          .send("Username " + req.body.Username + " already exists");
 
           return {
             status: 409,
