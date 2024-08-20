@@ -245,7 +245,6 @@ app.post(
       .then((user) => {
         console.log(user)
         if (user) {
-          console.log(response);
           console.log("Username already exists");
           res.status(409).send("Username already exists");
           return {
