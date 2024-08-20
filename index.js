@@ -247,12 +247,11 @@ app.post(
           console.log("Username " + req.body.Username + " already exists");
           res
           .status(409)
-          .text("Username " + req.body.Username + " already exists")
           .send("Username " + req.body.Username + " already exists")
           .statustext("Username " + req.body.Username + " already exists")
-          .json({
-            message: "Username " + req.body.Username + " already exists",
-            info: info,});
+          .statusmessage("Username " + req.body.Username + " already exists")
+          .body("Username " + req.body.Username + " already exists")
+          .type("error");
 
           return {
             status: 409,
