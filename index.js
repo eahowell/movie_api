@@ -244,7 +244,7 @@ app.post(
     await Users.findOne({ Username: req.body.Username })
       .then((user) => {
         console.log(user)
-        if (!user===null) {
+        if (user) {
           console.log(response);
           console.log("Username already exists");
           res.status(409).send("Username already exists");
