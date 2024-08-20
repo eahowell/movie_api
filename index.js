@@ -246,12 +246,10 @@ app.post(
         if (user) {
           console.log("Username " + req.body.Username + " already exists");
           res
+          .type("error")
           .status(409)
           .send("Username " + req.body.Username + " already exists")
-          .statustext("Username " + req.body.Username + " already exists")
-          .statusmessage("Username " + req.body.Username + " already exists")
-          .body("Username " + req.body.Username + " already exists")
-          .type("error");
+          .body("Username " + req.body.Username + " already exists");
 
           return {
             status: 409,
