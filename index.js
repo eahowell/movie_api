@@ -245,7 +245,13 @@ app.post(
       .then((user) => {
         if (user) {
           console.log("Username " + req.body.Username + " already exists");
-          res.status(409).json("Username " + req.body.Username + " already exists");
+          res
+          .status(409)
+          .type(application.json)
+          .json({
+            message: "Username " + req.body.Username + " already exists",
+            info: info,});
+
           return {
             status: 409,
             message: "Username " + req.body.Username + " already exists",
