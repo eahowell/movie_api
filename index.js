@@ -245,15 +245,12 @@ app.post(
       .then((user) => {
         if (user) {
           console.log("Username " + req.body.Username + " already exists");
-          res
-          .type("error")
-          .status(409)
-          .send("Username " + req.body.Username + " already exists");
+          
 
           return {
-            status: 409,
-            message: "Username " + req.body.Username + " already exists",
-            info: info,
+            res: res
+          .status(409)
+          .send("Username " + req.body.Username + " already exists")
           };
         } else {
           let hashPassword = Users.hashPassword(req.body.Password);
