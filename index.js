@@ -244,9 +244,10 @@ app.post(
     await Users.findOne({ Username: req.body.Username })
       .then((user) => {
         console.log(user)
-        if (user==!null) {
+        if (!user===null) {
           console.log(response);
           console.log("Username already exists");
+          res.status(409).send("Username already exists");
           return {
             status: 409,
             message: "Username " + req.body.Username + " already exists",
@@ -255,7 +256,7 @@ app.post(
         } else {
           let hashPassword = Users.hashPassword(req.body.Password);
           Users.create({
-            Username: req.body.Username,
+            Username: req.body.Username.toLowerCase(),
             Password: hashPassword,
             Email: req.body.Email,
             Birthday: req.body.Birthday,
