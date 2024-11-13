@@ -40,7 +40,7 @@ router.post("/login", (req, res) => {
         });
       }
       let token = generateJWTToken(user.toJSON());
-      return res.status(200).send("User successfully logged in");
+      return res.status(200).json({ user, token });
     });
   })(req, res);
 });
