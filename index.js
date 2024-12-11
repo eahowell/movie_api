@@ -52,6 +52,7 @@ let allowedOrigins = [
   "https://myflix-eahowell-7d843bf0554c.herokuapp.com",
   "https://eahowell-myflix.netlify.app",
   "https://www.mongodb.com/",
+  "https://eahowell.github.io/",
 ];
 
 app.use(
@@ -228,7 +229,7 @@ app.post(
       "Password",
       "Password must be between 8 and 25 characters long."
     ).isLength({ min: 8, max: 25 }),
-    // First & Last Name, Email, and Birtday must be present
+    // First & Last Name, Email, and Birthday must be present
     check("FirstName", "First Name is required").not().isEmpty(),
     check("LastName", "Last Name is required").not().isEmpty(),
     check("Birthday", "Birthday is required").not().isEmpty(),

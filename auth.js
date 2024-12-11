@@ -23,7 +23,7 @@ router.post("/login", (req, res) => {
         message: "Authentication error",
         error: error.message
       });
-    }
+    } 
     
     if (!user) {
       // Return the specific error message from passport strategy
