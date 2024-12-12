@@ -52,8 +52,11 @@ let allowedOrigins = [
   "https://myflix-eahowell-7d843bf0554c.herokuapp.com",
   "https://eahowell-myflix.netlify.app",
   "https://www.mongodb.com/",
-  "https://eahowell.github.io/",
-  "https://eahowell.github.io/myFlix-Angular-client/"
+  "https://eahowell.github.io",
+  "https://eahowell.github.io/myFlix-Angular-client/",
+  "https://github.com/",
+  "https://github.com/eahowell/myFlix-Angular-client",
+  
 ];
 
 app.use(
