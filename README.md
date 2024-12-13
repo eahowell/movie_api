@@ -13,8 +13,9 @@
   - [Table of Contents](#table-of-contents)
   - [Getting Started](#getting-started)
   - [Installation](#installation)
+    - [Install Node](#install-node)
       - [Dependencies](#dependencies)
-      - [Dev Depenencies](#dev-depenencies)
+      - [Dev Dependencies](#dev-dependencies)
   - [Usage](#usage)
   - [API Endpoints](#api-endpoints)
       - [Retrieving ID's](#retrieving-ids)
@@ -53,7 +54,7 @@ Welcome to the myFlix API! Find the information for favorite movies (directors, 
 - Passport-Local: ^1.0.0
 - UUID: ^9.0.1
 
-#### Dev Depenencies
+#### Dev Dependencies
 
 - ESlint: ^8.56.0
 - Nodemon: ^3.0.3
@@ -224,8 +225,8 @@ Responses
 > | http code | content-type | response |
 > | --------- | -------------------------- | ------------------------------------------------- |
 > | `500` | `text/plain;charset=UTF-8` | Description of the error |
-> | `422` | `application/json` | A JSON object holding an array of the validation erros |
-> | `404` | `text/plain;charset=UTF-8` | username + " already exists" |
+> | `422` | `application/json` | A JSON object holding an array of the validation errors |
+> | `409` | `text/plain;charset=UTF-8` | username + " already exists" |
 > | `201` | `application/json` | A JSON object holding data about the user that was added and including a userID, structured like: |
 >
 > ```json
@@ -698,7 +699,7 @@ Responses
 > | http code | content-type               | response                                                |
 > | --------- | -------------------------- | ------------------------------------------------------- |
 > | `500`     | `text/plain;charset=UTF-8` | Description of the error                                |
-> | `400`     | `text/plain;charset=UTF-8` | "The actor " + namr + " was not found"                  |
+> | `400`     | `text/plain;charset=UTF-8` | "The actor " + name + " was not found"                  |
 > | `200`     | `application/json`         | A JSON object holding the movies the actor has been in: |
 >
 > ```json
