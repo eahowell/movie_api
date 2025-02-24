@@ -11,7 +11,7 @@
  * @requires passport
  * @requires cors
  */
-
+require('dotenv').config();
 const express = require("express"),
   morgan = require("morgan"),
   fs = require("fs"),
