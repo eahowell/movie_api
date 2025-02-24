@@ -36,19 +36,23 @@ const Actors = Models.Actor;
 //   useUnifiedTopology: true,
 // });
 
-const dbURI = process.env.MONGO_URI || "mongodb://localhost:27017/eahowellDB";
+// const dbURI = process.env.MONGO_URI || "mongodb://localhost:27017/eahowellDB";
 
-mongoose.connect(dbURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
+// mongoose
+//   .connect(dbURI, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   })
+//   .then(() => console.log("MongoDB Connected"))
+//   .catch((err) => console.error("MongoDB Connection Error:", err));
+
+mongoose
+  .connect(process.env.CONNECTION_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("MongoDB Connected"))
-  .catch(err => console.error("MongoDB Connection Error:", err));
-
-mongoose.connect(process.env.CONNECTION_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+  .catch((err) => console.error("MongoDB Connection Error:", err));
 
 const app = express();
 app.use(express.json());
@@ -264,7 +268,7 @@ app.get(
   }
 );
 
-// READ - GET - Return a list of ALL users to the 
+// READ - GET - Return a list of ALL users to the
 /**
  * @function GET/users
  * @route GET /users
@@ -561,13 +565,13 @@ app.put(
  * @description Allows users to add a movie to their list of favorite movies
  * @route {PUT} /users/:username/favorites/:MovieID
  * @authentication JWT required
- * 
+ *
  * @param {String} Username (Required) - The username of the user
-* @param {String} MovieID  (Required) - The ID of the movie to add to favorites
- * 
+ * @param {String} MovieID  (Required) - The ID of the movie to add to favorites
+ *
  * @example Request URL
  * PUT /users/johndoe/favorites/65ea3766ecc7df78687ec88f
- * 
+ *
  * @returns {Object} 201 - Updated user object
  * @example Response - 201 - Success Response
  * {
@@ -580,7 +584,7 @@ app.put(
  *   "FavoriteMovies": ["65ea3766ecc7df78687ec88f"], // Added movie ID appears in array
  *   "ToWatch": []
  * }
- * 
+ *
  * @throws {Error} 400 - Permission denied - when username doesn't match authenticated user
  * @throws {Error} 404 - Username not found
  * @throws {Error} 500 - Internal server error
@@ -628,14 +632,14 @@ app.put(
  * @description Allows users to remove a movie from their list of favorite movies
  * @route {DELETE} /users/:username/favorites/:MovieID
  * @authentication JWT required
- * 
+ *
  * @param {String} Username (Required) - The username of the user
-* @param {String} MovieID  (Required) - The ID of the movie to remove from favorites
- * 
+ * @param {String} MovieID  (Required) - The ID of the movie to remove from favorites
+ *
  * @returns {Object} 201 - Updated user object
  * @example Request URL
  * DELETE /users/johndoe/favorites/65ea3766ecc7df78687ec88f
- * 
+ *
  * @example Response - 201 - Success Response
  * {
  *   "_id": "60f5b1c8c45e4c1b8c6f5678",
@@ -647,7 +651,7 @@ app.put(
  *   "FavoriteMovies": [], // Movie ID removed from array
  *   "ToWatch": []
  * }
- * 
+ *
  * @throws {Error} 400 - Permission denied - when username doesn't match authenticated user
  * @throws {Error} 404 - Username not found
  * @throws {Error} 500 - Internal server error
@@ -695,14 +699,14 @@ app.delete(
  * @description Allows users to add a movie to their list of movies to watch later
  * @route {PUT} /users/:username/toWatch/:MovieID
  * @authentication JWT required
- * 
-* @param {String} Username (Required) - The username of the user
-* @param {String} MovieID  (Required) - The ID of the movie to add to watch list
- * 
+ *
+ * @param {String} Username (Required) - The username of the user
+ * @param {String} MovieID  (Required) - The ID of the movie to add to watch list
+ *
  * @returns {Object} 201 - Updated user object
  * @example Request URL
  * PUT /users/johndoe/toWatch/65ea3766ecc7df78687ec88f
- * 
+ *
  * @example Response - 201 - Success Response
  * {
  *   "_id": "60f5b1c8c45e4c1b8c6f5678",
@@ -714,7 +718,7 @@ app.delete(
  *   "FavoriteMovies": [],
  *   "ToWatch": ["65ea3766ecc7df78687ec88f"] // Added movie ID appears in array
  * }
- * 
+ *
  * @throws {Error} 400 - Permission denied - when username doesn't match authenticated user
  * @throws {Error} 404 - Username not found
  * @throws {Error} 500 - Internal server error
@@ -756,36 +760,36 @@ app.put(
 
 // DELETE - Allow users to remove a movie from their list of To Watch
 /**
-* @function DELETE/users/:username/toWatch/:MovieID
-* @name DELETE/users: Remove Movie from Watch List
-* @summary Remove a movie from user's to-watch list
-* @description Allows users to remove a movie from their list of movies to watch later
-* @route {DELETE} /users/:username/toWatch/:MovieID
-* @authentication JWT required
-* 
-* @param {String} Username (Required) - The username of the user
-* @param {String} MovieID  (Required) - The ID of the movie to remove from watch list
-* 
-* @returns {Object} 201 - Updated user object
-* @example Request URL
-* DELETE /users/johndoe/toWatch/65ea3766ecc7df78687ec88f
-* 
-* @example Response - 201 - Success Response
-* {
-*   "_id": "60f5b1c8c45e4c1b8c6f5678",
-*   "Username": "johndoe",
-*   "Email": "john.doe@example.com",
-*   "Birthday": "1990-05-15T00:00:00.000Z",
-*   "FirstName": "John",
-*   "LastName": "Doe",
-*   "FavoriteMovies": [],
-*   "ToWatch": [] // Movie ID removed from array
-* }
-* 
-* @throws {Error} 400 - Permission denied - when username doesn't match authenticated user
-* @throws {Error} 404 - Username not found
-* @throws {Error} 500 - Internal server error
-*/
+ * @function DELETE/users/:username/toWatch/:MovieID
+ * @name DELETE/users: Remove Movie from Watch List
+ * @summary Remove a movie from user's to-watch list
+ * @description Allows users to remove a movie from their list of movies to watch later
+ * @route {DELETE} /users/:username/toWatch/:MovieID
+ * @authentication JWT required
+ *
+ * @param {String} Username (Required) - The username of the user
+ * @param {String} MovieID  (Required) - The ID of the movie to remove from watch list
+ *
+ * @returns {Object} 201 - Updated user object
+ * @example Request URL
+ * DELETE /users/johndoe/toWatch/65ea3766ecc7df78687ec88f
+ *
+ * @example Response - 201 - Success Response
+ * {
+ *   "_id": "60f5b1c8c45e4c1b8c6f5678",
+ *   "Username": "johndoe",
+ *   "Email": "john.doe@example.com",
+ *   "Birthday": "1990-05-15T00:00:00.000Z",
+ *   "FirstName": "John",
+ *   "LastName": "Doe",
+ *   "FavoriteMovies": [],
+ *   "ToWatch": [] // Movie ID removed from array
+ * }
+ *
+ * @throws {Error} 400 - Permission denied - when username doesn't match authenticated user
+ * @throws {Error} 404 - Username not found
+ * @throws {Error} 500 - Internal server error
+ */
 app.delete(
   "/users/:username/toWatch/:MovieID",
   passport.authenticate("jwt", { session: false }),
@@ -829,29 +833,29 @@ app.delete(
  * @description Allows existing users to completely delete their account and all associated data
  * @route {DELETE} /users/:username
  * @authentication JWT required
- * 
+ *
  * @param {String} Username (Required) - The username of the account to be deleted
- * 
+ *
  * @returns {String} 200 - Success message
- * 
+ *
  * @example Request URL
  * DELETE /users/johndoe
- * 
+ *
  * @example Response - 200 - Success Response
  * "johndoe was deleted."
- * 
+ *
  * @example Response - 400 - Error Response (User Not Found)
  * "johndoe was not found"
- * 
+ *
  * @example Response - 400 - Error Response (Permission Denied)
  * "Permission denied john_smith is not johndoe"
- * 
+ *
  * @security
  * - Requires valid JWT token
  * - Can only delete your own account (username in token must match username in URL)
  * - Action is permanent and irreversible
  * - All user data including favorites and watch lists will be deleted
- * 
+ *
  * @throws {Error} 400 - Permission denied - when username doesn't match authenticated user
  * @throws {Error} 400 - User not found - when username doesn't exist
  * @throws {Error} 500 - Internal server error
@@ -891,11 +895,11 @@ app.delete(
  * @description Returns a list of all directors with their biographical information
  * @route {GET} /directors
  * @authentication JWT required
- * 
+ *
  * @returns {Object[]} 200 - An array of director objects
  * @example Request URL
  * GET /directors
- * 
+ *
  * @example Response - 200 - Success Response
  * [
  *   {
@@ -913,7 +917,7 @@ app.delete(
  *     "Deathday": null
  *   }
  * ]
- * 
+ *
  * @throws {Error} 500 - Internal server error
  */
 app.get(
@@ -940,11 +944,11 @@ app.get(
  * @description Returns a list of all available movie genres and their descriptions
  * @route {GET} /genres
  * @authentication JWT required
- * 
+ *
  * @returns {Object[]} 200 - An array of genre objects
  * @example Request URL
  * GET /genres
- * 
+ *
  * @example Response - 200 - Success Response
  * [
  *   {
@@ -958,7 +962,7 @@ app.get(
  *     "Description": "Speculative fiction that typically deals with imaginative and futuristic concepts such as advanced science, technology, time travel, parallel universes, and extraterrestrial life."
  *   }
  * ]
- * 
+ *
  * @throws {Error} 500 - Internal server error
  */
 
@@ -985,16 +989,16 @@ app.get(
  * @description Returns the ID of a specific genre when given its name
  * @route {GET} /genres/:genreName/id
  * @authentication JWT required
- * 
+ *
  * @returns {String} 200 - The ID of the genre
  * @param {String} genreName.path.required - The name of the genre to look up
- * 
+ *
  * @example Request URL
  * GET /genres/Drama/id
- * 
+ *
  * @example Response - 200 - Success Response
  * "65ea58f9c4e85e82e09e8fa1"
- * 
+ *
  * @throws {Error} 400 - Genre not found
  * @throws {Error} 500 - Internal server error
  */
@@ -1027,16 +1031,16 @@ app.get(
  * @description Returns the ID of a specific director when given their name
  * @route {GET} /directors/:directorName/id
  * @authentication JWT required
- * 
+ *
  * @returns {String} 200 - The ID of the director
  * @param {String} directorName.path.required - The name of the director to look up
- * 
+ *
  * @example Request URL
  * GET /directors/Christopher%20Nolan/id
- * 
+ *
  * @example Response - 200 - Success Response
  * "65ea58f9c4e85e82e09e8fa3"
- * 
+ *
  * @throws {Error} 400 - Director not found
  * @throws {Error} 500 - Internal server error
  */
