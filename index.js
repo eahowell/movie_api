@@ -35,7 +35,6 @@ const Actors = Models.Actor;
 //   useNewUrlParser: true,
 //   useUnifiedTopology: true,
 // });
-const mongoose = require("mongoose");
 
 const dbURI = process.env.MONGO_URI || "mongodb://localhost:27017/eahowellDB";
 
@@ -45,7 +44,7 @@ mongoose.connect(dbURI, {
 })
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.error("MongoDB Connection Error:", err));
-  
+
 mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
