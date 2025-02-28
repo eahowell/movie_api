@@ -84,7 +84,7 @@ let allowedOrigins = [
   "https://eahowell.github.io/myFlix-Angular-client/",
   "https://github.com/",
   "https://github.com/eahowell/myFlix-Angular-client",
-  "http://cc-myflix-client-static-website.s3-website-us-east-1.amazonaws.com",
+  "http://cc-myflix-website.s3-website-us-east-1.amazonaws.com",
 ];
 
 app.use(
