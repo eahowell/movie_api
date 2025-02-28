@@ -53,7 +53,14 @@ mongoose
   })
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.error("MongoDB Connection Error:", err));
+// Debug MongoDB connection
+mongoose.connection.on('error', (err) => {
+  console.error('MongoDB connection error:', err);
+});
 
+mongoose.connection.once('open', () => {
+  console.log('MongoDB connected successfully');
+});
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
