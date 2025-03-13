@@ -62,6 +62,17 @@ mongoose.connection.once('open', () => {
   console.log('MongoDB connected successfully');
 });
 const app = express();
+// Add detailed request logging
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.originalUrl}`);
+  next();
+});
+
+// Add error handling middleware
+app.use((err, req, res, next) => {
+  console.error(`${new Date().toISOString()} - Error:`, err);
+  res.status(500).send('Server error occurred');
+});
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("common"));
@@ -1139,6 +1150,52 @@ app.get(
       });
   }
 );
+
+/**
+ * @function GET/health
+ * @name GET/health: API Health Check
+ * @summary Check if the API is running
+ * @description Public endpoint to verify the API is up and running
+ * @route {GET} /health
+ * @access Public - No authentication required
+ * 
+ * @returns {Object} 200 - Status information including API version, uptime, and database connection status
+ * @example Response - 200 - Success Response
+ * {
+ *   "status": "ok",
+ *   "message": "myFlix API is running",
+ *   "version": "1.0.0",
+ *   "timestamp": "2025-03-13T12:34:56.789Z",
+ *   "uptime": "1d 2h 34m 56s",
+ *   "database": {
+ *     "connected": true
+ *   }
+ * }
+ */
+app.get("/health", (req, res) => {
+  // Calculate server uptime in a readable format
+  const uptimeSeconds = process.uptime();
+  const days = Math.floor(uptimeSeconds / 86400);
+  const hours = Math.floor((uptimeSeconds % 86400) / 3600);
+  const minutes = Math.floor((uptimeSeconds % 3600) / 60);
+  const seconds = Math.floor(uptimeSeconds % 60);
+  const uptime = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+  // Check database connection status
+  const dbConnected = mongoose.connection.readyState === 1; // 1 = connected
+
+  // Return health info
+  res.status(200).json({
+    status: "ok",
+    message: "myFlix API is running",
+    version: "1.0.0", // You can update this or pull from package.json
+    timestamp: new Date().toISOString(),
+    uptime: uptime,
+    database: {
+      connected: dbConnected
+    }
+  });
+});
 
 // Error handling middleware
 app.use((err, req, res, next) => {
