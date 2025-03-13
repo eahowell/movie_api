@@ -12,6 +12,7 @@
  * @requires cors
  */
 require('dotenv').config();
+console.log("Loaded CONNECTION_URI:", process.env.CONNECTION_URI);
 const express = require("express"),
   morgan = require("morgan"),
   fs = require("fs"),
