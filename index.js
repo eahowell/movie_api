@@ -104,6 +104,10 @@ let allowedOrigins = [
   "https://github.com/",
   "https://github.com/eahowell/myFlix-Angular-client",
   "http://cc-myflix-website.s3-website-us-east-1.amazonaws.com",
+  "http://ehowell-dev.me/myFlix-Angular-client",
+  "http://ehowell-dev.me/myFlix-Angular-client/",
+  "http://ehowell-dev.me/",
+  "http://ehowell-dev.me",
   "*"
 ];
 
@@ -1173,30 +1177,25 @@ app.get(
  *   }
  * }
  */
-app.get("/health", (req, res) => {
-  // Calculate server uptime in a readable format
-  const uptimeSeconds = process.uptime();
-  const days = Math.floor(uptimeSeconds / 86400);
-  const hours = Math.floor((uptimeSeconds % 86400) / 3600);
-  const minutes = Math.floor((uptimeSeconds % 3600) / 60);
-  const seconds = Math.floor(uptimeSeconds % 60);
-  const uptime = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-
-  // Check database connection status
-  const dbConnected = mongoose.connection.readyState === 1; // 1 = connected
-
-  // Return health info
+app.get('/health', (req, res) => {
   res.status(200).json({
-    status: "ok",
-    message: "myFlix API is running",
-    version: "1.0.0", // You can update this or pull from package.json
+    status: 'ok',
+    message: 'myFlix API is running',
+    version: '1.0.0',
     timestamp: new Date().toISOString(),
-    uptime: uptime,
+    uptime: formatUptime(process.uptime()),
     database: {
-      connected: dbConnected
+      connected: mongoose.connection.readyState === 1
     }
   });
 });
+
+function formatUptime(seconds) {
+  const days = Math.floor(seconds / (3600 * 24));
+  const hours = Math.floor((seconds % (3600 * 24)) / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  return `${days}d ${hours}h ${minutes}m`;
+}
 
 // Error handling middleware
 app.use((err, req, res, next) => {
