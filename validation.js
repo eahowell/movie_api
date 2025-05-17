@@ -4,7 +4,7 @@
 
 // CREATE - POST - Validate provided password is correct;  (using username and password)
 module.exports = (router) => {
-  router.post("/validation", async (req, res) => {
+  router.post("/validation", async (err, req, res, next) => {
     await Users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
