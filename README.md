@@ -1,47 +1,95 @@
-# myFlix API
+![myFlix Logo](public/img/myFlixLogo.png)
+# Welcome to the myFlix API
 
 ![GitHub issues](https://img.shields.io/github/issues/eahowell/movie_api?color=yellow)
 ![GitHub Repo stars](https://img.shields.io/github/stars/eahowell/movie_api)
 ![GitHub forks](https://img.shields.io/github/forks/eahowell/movie_api)
 ![GitHub watchers](https://img.shields.io/github/watchers/eahowell/movie_api)
 
+## 📖 Overview
 
+ The client side of the myFlix app using React that's using the server-side [movie_api](https://github.com/eahowell/movie_api) (REST API and Database).  
+ myFlix is a full-stack (MERN: MongoDB, Express, React, Node.js) single-page web application that serves as a movie database. Users can browse a curated list of movies with detailed information including descriptions, directors, and genre details. Registered users can create a profile, manage their account, and add movies to their favorites and watch lists.  
 
-## Table of Contents
-
-- [myFlix API](#myflix-api)
-  - [Table of Contents](#table-of-contents)
-  - [Getting Started](#getting-started)
-  - [Installation](#installation)
-    - [Install Node](#install-node)
-      - [Dependencies](#dependencies)
-      - [Dev Dependencies](#dev-dependencies)
-  - [Usage](#usage)
-  - [API Endpoints](#api-endpoints)
+## 📎 Table of Contents
+- [Welcome to the myFlix API](#welcome-to-the-myflix-api)
+  - [📖 Overview](#-overview)
+  - [📎 Table of Contents](#-table-of-contents)
+  - [📺 Demo](#-demo)
+  - [🛠️ Tech Stack](#️-tech-stack)
+  - [🏎️ Getting Started](#️-getting-started)
+    - [Prerequisites](#prerequisites)
+  - [🔧 Installation](#-installation)
+  - [⛓️ Dependencies](#️-dependencies)
+    - [Core Dependencies](#core-dependencies)
+    - [Dev Dependencies](#dev-dependencies)
+  - [🔗 API Endpoints](#-api-endpoints)
       - [Retrieving ID's](#retrieving-ids)
       - [Interacting with the Users](#interacting-with-the-users)
       - [Interacting with Movies and Directors](#interacting-with-movies-and-directors)
-  - [Authentication](#authentication)
-  - [Database](#database)
-  - [License](#license)
+  - [🪙 Authentication](#-authentication)
+  - [🗄️ Database](#️-database)
+  - [📂 Folder Structure](#-folder-structure)
+  - [🤝 Contributing](#-contributing)
+  - [🪪 License](#-license)
+  - [✉️ Contact](#️-contact)
 
-## Getting Started
-Welcome to the myFlix API! Find the information for favorite movies (directors, actors, genres, etc.) Users can register, log in, and manage their favorite movies.
 
-- [Visit the live myFlix client](https://eahowell-myflix.netlify.app/)
+## 📺 Demo
 
-## Installation
-### Install Node
-  - Get the newest release to download to your device. 
-    - In the README section of this [NVM for Windows GitHub page](https://github.com/coreybutler/nvm-windows#readme), you’ll find a Download Now! button. 
-    - Clicking this button will open information about the latest release, including a list of “Assets”. 
-    - From this list, download the nvm-setup.zip file
+- [Live myFlix Angular Frontend](https://eahowell.github.io/myFlix-Angular-client/welcome)
+- [Live myFlix React Frontend](https://eahowell-myflix.netlify.app/)
+- [Demo Video of React Frontend](https://www.loom.com/share/29a46cf2d8d64a64916970a9ffa01fd2?sid=ccd86a9f-8e26-4e9b-ab49-2ccfa9db7037)
 
-#### Dependencies
+  Test account:
+    ```
+    Username: testportfolio
+    Password: 12345678 
+    ```
 
+[🔝](#welcome-to-the-myflix-api)
+## 🛠️ Tech Stack
+
+- **Language**: JavaScript (ES6+)
+- **Runtime**: Node.js
+- **Web Framework**: Express
+- **Database**: MongoDB (Mongoose ODM)
+- **Authentication**: Passport.js (Local & JWT strategies), JSON Web Tokens
+- **Validation**: express-validator
+- **Logging**: Morgan
+- **Testing**: Jest, Supertest
+- **Linting**: ESLint
+- **Dev Tools**: Nodemon, Git, GitHub, Visual Studio Code  
+  
+[🔝](#welcome-to-the-myflix-api) 
+## 🏎️ Getting Started
+### Prerequisites
+
+- Node.js (>= 14.x)
+- npm (>= 6.x)
+  
+[🔝](#welcome-to-the-myflix-api)
+## 🔧 Installation
+
+  1. Clone the repository:
+     ```bash
+     git clone https://github.com/eahowell/movie_api.git
+     cd movie_api
+  2. Install dependencies:
+      ```bash 
+      npm install
+      ```
+  3. Start the development server:
+      ```bash 
+      npm run dev
+      ```
+[🔝](#welcome-to-the-myflix-api)  
+## ⛓️ Dependencies
+### Core Dependencies
 - Bcrypt: ^5.1.1
 - Body-Parser: ^1.20.2
 - CORS: ^2.8.5
+- dotenv: ^16.4.7
 - Express: ^4.18.2
 - Express-Validator: ^7.0.1
 - JSONWebToken: ^9.0.2
@@ -53,17 +101,13 @@ Welcome to the myFlix API! Find the information for favorite movies (directors, 
 - Passport-JWT: ^4.0.1
 - Passport-Local: ^1.0.0
 - UUID: ^9.0.1
-
-#### Dev Dependencies
+### Dev Dependencies
 
 - ESlint: ^8.56.0
-- Nodemon: ^3.0.3
-
-## Usage
-
-- See the API documentation for detailed info.
-
-## API Endpoints
+- Nodemon: ^3.0.3  
+  
+[🔝](#welcome-to-the-myflix-api)
+## 🔗 API Endpoints
 
 ---
 
@@ -192,7 +236,9 @@ Example cURL
 >  curl -L GET "Content-Type: application/json" http://localhost:8080/users/[Username]/id
 > ```
 
-</details>
+</details>  
+
+[🔝](#welcome-to-the-myflix-api)  
 
 ---
 
@@ -505,6 +551,8 @@ Example cURL
 
 </details>
 
+[🔝](#welcome-to-the-myflix-api)
+
 ---
 
 #### Interacting with Movies and Directors
@@ -718,11 +766,15 @@ Example cURL
 
 </details>
 
-## Authentication
+[🔝](#welcome-to-the-myflix-api)
+## 🪙 Authentication  
 - Uses LocalStrategy and JWTStrategy
 - Users are authenticated with basic HTTP authentication and generating a JWT token for authenticating future requests
+- JWTs are stored in `localStorage`.  
+- Send as header:  `Authorization: Bearer <token>`   
 
-## Database
+[🔝](#welcome-to-the-myflix-api)
+## 🗄️ Database
 - myFlixDB is stored in MongoDB
 - Collections include:
   - Users
@@ -731,5 +783,73 @@ Example cURL
   - Directors
   - Actors
  
-## License
-- ISC
+[🔝](#welcome-to-the-myflix-api)
+## 📂 Folder Structure
+```text
+movie_api/
+├── public/
+│   └── img/
+│       └── myFlixLogo.png
+├── src/
+│   ├── controllers/
+│   │   ├── authController.js
+│   │   ├── moviesController.js
+│   │   └── usersController.js
+│   ├── middleware/
+│   │   └── passport.js
+│   ├── models/
+│   │   ├── actor.js
+│   │   ├── director.js
+│   │   ├── genre.js
+│   │   ├── movie.js
+│   │   └── user.js
+│   ├── routes/
+│   │   ├── actors.js
+│   │   ├── directors.js
+│   │   ├── genres.js
+│   │   ├── movies.js
+│   │   └── users.js
+│   ├── utils/
+│   │   └── validators.js
+│   └── index.js
+├── tests/
+│   ├── actors.test.js
+│   ├── movies.test.js
+│   └── users.test.js
+├── .env
+├── .gitignore
+├── README.md
+├── package.json
+└── yarn.lock (or package-lock.json)
+```   
+
+[🔝](#welcome-to-the-myflix-api)
+
+## 🤝 Contributing
+1. Fork the repo  
+2. Create a feature branch: `git checkout -b feature/your-feature-name`  
+3. Commit your changes: `git commit -m "Add some feature"`  
+4. Push to branch: `git push origin feature/your-feature-name`  
+5. Open a pull request  
+  
+[🔝](#welcome-to-the-myflix-api)
+## 🪪 License
+- API uses ISC
+  
+[🔝](#welcome-to-the-myflix-api)
+## ✉️ Contact
+
+**Developer:** [Elizabeth Howell](ehowell.webdev@gmail.com)  
+**Website:** [Portfolio](http://ehowell-dev.me/PortfolioWebsite/)  
+**Twitter:** [ehowell_webdev](https://x.com/ehowell_webdev)  
+**GitHub:** [eahowell](https://github.com/eahowell)
+  
+[🔝](#welcome-to-the-myflix-api)
+
+---
+ 
+Thank you for checking out myFlix! This application was developed as part of the Career Foundry Full-Stack Web Development Course to demonstrate skills in full-stack development, RESTful API design, authentication, and dynamic frontend rendering.
+  
+[🔝](#welcome-to-the-myflix-api)
+
+[def]: #️-contact
