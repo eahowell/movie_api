@@ -8,8 +8,8 @@
 
 ## 📖 Overview
 
- The client side of the myFlix app using React that's using the server-side [movie_api](https://github.com/eahowell/movie_api) (REST API and Database).  
- myFlix is a full-stack (MERN: MongoDB, Express, React, Node.js) single-page web application that serves as a movie database. Users can browse a curated list of movies with detailed information including descriptions, directors, and genre details. Registered users can create a profile, manage their account, and add movies to their favorites and watch lists.  
+ The server side (REST API and Database) of the myFlix app that is used by the [myFlix Angular Frontend](https://github.com/eahowell/myFlix-Angular-client) and the [myFlix React Frontend](https://github.com/eahowell/myFlix-client).  
+ myFlix is a full-stack (Both MEAN and MERN: MongoDB, Express, Angular/React, Node.js) single-page web application that serves as a movie database. Users can browse a curated list of movies with detailed information including descriptions, directors, and genre details. Registered users can create a profile, manage their account, and add movies to their favorites and watch lists.  
 
 ## 📎 Table of Contents
 - [Welcome to the myFlix API](#welcome-to-the-myflix-api)
